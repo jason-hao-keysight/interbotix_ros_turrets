@@ -1,10 +1,11 @@
 ![turret_banner](images/home-page-img.png)
 
 ## Overview
-Welcome to the Keysight *interbotix_ros_turrets* repository! This repo contains custom ROS packages to control the wxxms turret (a.k.a pan/tilt mechanisms) sold at [Interbotix](https://www.trossenrobotics.com/) using [Keysight PathWave Test Automation](https://www.keysight.com/us/en/products/software/pathwave-test-software/pathwave-test-automation-software.html) built on OpenTAP(https://opentap.io/). These ROS packages build upon the ROS driver nodes found in the [interbotix_ros_core](https://github.com/Interbotix/interbotix_ros_core) repository. Support-level software can be found in the [interbotix_ros_toolboxes](https://github.com/Interbotix/interbotix_ros_toolboxes) repository.
+Welcome to the Keysight *interbotix_ros_turrets* repository! This repo contains custom ROS packages to control the wxxms turret (a.k.a pan/tilt mechanisms) sold at [Interbotix](https://www.trossenrobotics.com/) using [Keysight PathWave Test Automation](https://www.keysight.com/us/en/products/software/pathwave-test-software/pathwave-test-automation-software.html) built on [OpenTAP](https://opentap.io/). These ROS packages build upon the ROS driver nodes found in the [interbotix_ros_core](https://github.com/Interbotix/interbotix_ros_core) repository. Support-level software can be found in the [interbotix_ros_toolboxes](https://github.com/Interbotix/interbotix_ros_toolboxes) repository.
 
 ## OpenTAP
 ![OpenTAP](images/opentap.PNG)
+
 OpenTAP is an open source project for fast and easy development, deployment and execution of automated tests.
 
 The goal of OpenTAP is to transform test automation from a largely homegrown, isolated endeavor into a standardized activity that speeds test development and adds innovative capabilities. OpenTAP leverages open source collaboration as a proven strategy to create broadly interoperable and reusable technology.

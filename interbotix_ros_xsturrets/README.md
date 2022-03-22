@@ -2,7 +2,7 @@
 ![xsturret_banner](images/xsturret_banner.png)
 
 ## Overview
-Welcome to the *interbotix_ros_xsturrets* sub-repo! This repository contains ROS packages meant to be used with the many [X-Series robotic turrets](https://www.trossenrobotics.com/c/robot-turrets.aspx)  sold by Trossen Robotics. Packages were tested on Ubuntu Linux 16.04, 18.04, and 20.04 using ROS Kinetic, Melodic, and Noetic respectively. Additionally, all ROS nodes were written using Python or C++. However, any programming language capable of sending ROS messages can be used to control the robots. To that effect, the core packages that make up this repo are as follows:
+Welcome to the Keysight Modificaition of *interbotix_ros_xsturrets* sub-repo! This repository contains ROS packages meant to be used with the many [X-Series robotic turrets](https://www.trossenrobotics.com/c/robot-turrets.aspx)  sold by Trossen Robotics with additional functionality allowing the turret to be operated remotely by OpenTAP.Plugins.HornPositioner. Packages were tested on Ubuntu Linux 20.04 using Noetic. Additionally, all ROS nodes were written using Python or C++. However, any programming language capable of sending ROS messages can be used to control the robots. To that effect, the core packages that make up this repo are as follows:
 - **interbotix_xsturret_gazebo** - contains the config files necessary to launch a turret in Gazebo, including tuned PID gains for ros_control
 - **interbotix_xsturret_control:** contains the motor configuration files and the 'root' launch file that is responsible for launching the turret
 - **interbotix_xsturret_descriptions:** contains the meshes and URDFs (including accurate inertial models for the links) for all turret platforms
@@ -32,12 +32,7 @@ All the ROS packages and Python scripts found within the [examples](examples/) d
 
 ## Compatible Products
 The ROS packages located here can be used with any of the Interbotix turret kits linked below. Next to each name is the name used to describe it in software (specifically for the `robot_model` argument in launch files). The software name is composed of three parts. The first two letters correspond to the model type (ex. 'wx' for 'WidowX'). The next two letters signify motor type ('xl' for XL430, and 'xm' for XM430). Finally, the last letter corresponds to the number of motors used in the tilt joint ('s' for single or 'd' for dual).
-- [PhantomX XL430 Robot Turret](https://www.trossenrobotics.com/phantomx-x-series-robot-turret.aspx) (pxxls)
 - [WidowX XM430 Robot Turret](https://www.trossenrobotics.com/widowx-x-series-robot-turret.aspx) (wxxms)
-- [WidowX Dual XM430 Robot Turret](https://www.trossenrobotics.com/widowx-x-series-dual-servo-robot-turret.aspx) (wxxmd)
-- [ViperX XM540 Robot Turret](https://www.trossenrobotics.com/viperx-x-series-robot-turret.aspx) (vxxms)
-- [ViperX Dual XM540 Robot Turret](https://www.trossenrobotics.com/viperx-x-series-dual-servo-robot-turret.aspx) (vxxmd)
-- [PhantomX Vision Tracking Kit](https://www.trossenrobotics.com/phantomx-x-series-robot-vision-tracking-kit.aspx) (pxxls_cam)
 
 ## Requirements
 Below is a list of the hardware you will need to get started:
@@ -82,17 +77,17 @@ Now change the url inside from `https://api.ignitionfuel.org` to `https://api.ig
 
         $ roslaunch interbotix_xsturret_descriptions xsturret_description.launch robot_model:=wxxms use_joint_pub_gui:=true
 
-2. Get familiar with the physical robot turret (let's say... a ViperX Dual XM540!) by executing the following command in the terminal (Ctrl-C from Step 1 first):
+2. Get familiar with the physical robot turret by executing the following command in the terminal (Ctrl-C from Step 1 first):
 
-        $ roslaunch interbotix_xsturret_control xsturret_control.launch robot_model:=vxxmd
+        $ roslaunch interbotix_xsturret_control xsturret_control.launch robot_model:=wxxms
 
 3. By default, all the motors in the robot are torqued on so it will be very difficult to manually manipulate it. To torque off the motors, execute the command below in another terminal. Be aware though that this will cause the robot to collapse so manually hold or secure the turret before executing it.
 
-        $ rosservice call /vxxmd/torque_enable "{cmd_type: 'group', name: 'all', enable: false}"
+        $ rosservice call /wxxms/torque_enable "{cmd_type: 'group', name: 'all', enable: false}"
 
 4. Now you should be able to freely manipulate the motors. Take note of how the Rviz model accurately mimics the real robot. To make the robot hold a certain pose, manually hold the robot in the desired pose and execute the following command:
 
-        $ rosservice call /vxxmd/torque_enable "{cmd_type: 'group', name: 'all', enable: true}"
+        $ rosservice call /wxxms/torque_enable "{cmd_type: 'group', name: 'all', enable: true}"
 
     You can now let go and observe how the turret stays in place.
 
@@ -111,3 +106,4 @@ To contribute your own custom X-Series turret in this repo, you will need to do 
 ## Contributors
 - [Solomon Wiznitzer](https://github.com/swiz23) - **ROS Engineer**
 - [Levi Todes](https://github.com/LeTo37) - **CAD Engineer**
+- [Aaron Wood] (aaron.wood@keysight.com) - **Keysight PathWave Test Automation Engineer**

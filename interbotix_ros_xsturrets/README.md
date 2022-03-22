@@ -53,33 +53,15 @@ There is not much required to get the robot ready to work as most of the setup i
 ## Software Setup
 To get all the code setup, refer to the computer platform types below and run the appropriate installation script. Afterwards, continue with the [Installation Checks](#installation-checks) sub-section.
 
-###### AMD64 Architecture
-If your computer uses an Intel or AMD based processor (which is the case for NUCs, most laptops and desktop computers), follow the commands below to download and run the installation script. Note that the script will also install the full desktop version of ROS (either Kinetic, Melodic, or Noetic) if it's not yet on your system. As an aside, if you've been using the old ROS packages from the [interbotix_ros_arms](https://github.com/Interbotix/interbotix_ros_arms) repository, and would like to migrate to using the ROS packages in this repository, *make sure that you do not already have a catkin workspace named 'interbotix_ws'*. Otherwise, the install script will not clone these packages. Either rename or delete the old 'interbotix_ws' workspace beforehand.
-
-    $ sudo apt install curl
-    $ curl 'https://raw.githubusercontent.com/Interbotix/interbotix_ros_turrets/main/interbotix_ros_xsturrets/install/amd64/xsturret_amd64_install.sh' > xsturret_amd64_install.sh
-    $ chmod +x xsturret_amd64_install.sh
-    $ ./xsturret_amd64_install.sh
-
 ###### Raspberry Pi 4B (ARM64 Architecture)
 If you purchased a Raspberry Pi 4B Kit with a turret from our website, there is no need to install anything as the Pi should already come preloaded with all the necessary software. If you purchased your own Raspberry Pi 4B from a third party, feel free to follow the instructions [here](https://github.com/Interbotix/interbotix_ros_toolboxes/blob/main/interbotix_rpi_toolbox/README.md) to get it properly setup before following the commands below. If you only purchased the stand-alone Raspberry Pi 4B Kit from our store (which comes pre-configured with Ubuntu and ROS), and would like to use it with an turret, then follow the commands below to download and run the installation script. Note that the script will install the full desktop version of ROS Melodic if it's not yet on your system, ask you for your desired robot model (ex. wxxmt), and prompt you about whether or not you'd like the Joystick ROS package to start at boot.
 
     $ sudo apt install curl
-    $ curl 'https://raw.githubusercontent.com/Interbotix/interbotix_ros_turrets/main/interbotix_ros_xsturrets/install/rpi4/xsturret_rpi4_install.sh' > xsturret_rpi4_install.sh
+    $ curl 'https://raw.githubusercontent.com/aaron-wood-keysight/interbotix_ros_turrets/main/interbotix_ros_xsturrets/install/rpi4/xsturret_rpi4_install.sh' > xsturret_rpi4_install.sh
     $ chmod +x xsturret_rpi4_install.sh
     $ ./xsturret_rpi4_install.sh
 
-If you *do* want to have the Joystick ROS package start at boot, you will first have to pair your PS4 controller with the Pi. Refer [here](https://github.com/Interbotix/interbotix_ros_toolboxes/tree/main/interbotix_rpi_toolbox#ps4-controller-setup) for details.
 
-##### Remote Install
-For some robotic projects, you may want to run your robot in a 'headless' state on some computer (like a NUC or Raspberry Pi), and monitor the robot's state (in Rviz for example) on your personal (a.k.a remote) computer over a local network. For this to work, run the installation script below on your personal Linux computer. Note that ROS and Rviz must already be installed! As an FYI, the script will prompt you to insert the hostname of the robot (NOT the remote) computer. As an example, if you wanted to monitor the state of a robot turret purchased with a Raspberry Pi 4B Kit, you would set the hostname to `pibot`. To find out the hostname of the robot computer, just open a terminal and type `hostname`
-
-    $ sudo apt install curl
-    $ curl 'https://raw.githubusercontent.com/Interbotix/interbotix_ros_turrets/main/interbotix_ros_xsturrets/install/xsturret_remote_install.sh' > xsturret_remote_install.sh
-    $ chmod +x xsturret_remote_install.sh
-    $ ./xsturret_remote_install.sh
-
-Be aware that the installation script will export the ROS_MASTER_URI environment variable in your personal computer's ~/.bashrc file to `http://<hostname>.local:11311`. Make sure to comment out this line when done monitoring or your personal computer will complain about not being able to find its ROS Master.
 
 ##### Installation Checks
 After running the installation script on the robot computer, verify that it was successful in finding the U2D2 by checking that the port name shows up as `ttyDXL`

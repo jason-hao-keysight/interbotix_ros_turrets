@@ -13,7 +13,7 @@ else
 fi
 
 read -p "What is your robot model? (ex. wxxmd): " ROBOT_MODEL
-read -p "Run the Joystick ROS package at system boot? " resp
+read -p "Run Keysight PathWave Test Automation package at system boot? " resp
 if [[ $resp == [yY] || $resp == [yY][eE][sS] ]]; then
   run_joy_at_boot=true
 else
@@ -121,26 +121,44 @@ if [ "$run_joy_at_boot" = true ]; then
   touch xsturret_rpi4_launch.sh
   echo -e "#! /bin/bash
 
-# This script is called by the xsturret_rpi4_boot.service file when
-# the Raspberry Pi boots. It just sources the ROS related workspaces
-# and launches the xsturret_simple_interface launch file.
+# This script is called by the xsturret_rpi4_Keysight_PathWave_Test_Automation_boot.service file when
+# the Raspberry Pi boots. It sources the ROS related workspaces
+# and launches the xsturret_control launch file.
+# also launches RPiServoDriver.py python script for accepting commands
+# from OpenTAP.Plugins.HornPositioner in Keysight PathWave Test Automation 
 
 source /opt/ros/$ROS_NAME/setup.bash
 source $INTERBOTIX_WS/devel/setup.bash
 
-# if the xs_sdk node is already running...
-if pgrep -x \"roslaunch\" > /dev/null; then
-  echo \"Launching turret GUI node only\"
-  rosrun interbotix_xsturret_simple_interface xsturret_simple_interface_gui __ns:=$ROBOT_MODEL
+launch_from_boot=true
+if [ \"\$launch_from_boot\" == true ] ; then
+        echo \"Launching...\"
+	roslaunch interbotix_xsturret_control xsturret_control.launch robot_model:=wxxms & python3 /home/aaron/interbotix_ws/src/interbotix_ros_turrets/interbotix_ros_xsturrets/install/rpi4/RPiServoDriver.py
 else
-  echo \"Launching...\"
-  roslaunch interbotix_xsturret_simple_interface xsturret_simple_interface.launch use_rviz:=false robot_model:=$ROBOT_MODEL
+        echo \"Boot launch disabled\"
 fi" > xsturret_rpi4_launch.sh
 
+  touch xsturret_rpi4_Keysight_PathWave_Test_Automation_boot.service
+  echo -e "# This service auto-launches the xsturret_control.launch file when the computer boots.
+# This file should be copied to /lib/systemd/system. Afterwards, type...
+# 'sudo systemctl daemon-reload' followed by 'sudo systemctl enable xsturret_rpi4_OpenTAP_boot.service'.
+
+[Unit]
+Description=Start X-Series Turret Keysight PathWave Test Automation Control
+
+[Service]
+Environment=DISPLAY=:0
+Environment=XAUTHORITY=/home/"$USER"/.Xauthority
+ExecStart=/home/"$USER"/interbotix_ws/src/interbotix_ros_turrets/interbotix_ros_xsturrets/install/rpi4/xsturret_rpi4_launch.sh
+Restart=on-failure
+
+[Install]
+WantedBy=graphical.target" > xsturret_rpi4_Keysight_PathWave_Test_Automation_boot.service
+
   chmod +x xsturret_rpi4_launch.sh
-  sudo cp xsturret_rpi4_boot.service /lib/systemd/system/
+  sudo cp xsturret_rpi4_Keysight_PathWave_Test_Automation_boot.service /lib/systemd/system/
   sudo systemctl daemon-reload
-  sudo systemctl enable xsturret_rpi4_boot.service
+  sudo systemctl enable xsturret_rpi4_OpenTAP_boot.service
   echo -e "hdmi_force_hotplug=1\nhdmi_group=2\nhdmi_mode=82" | sudo tee -a /boot/firmware/usercfg.txt > /dev/null
 fi
 

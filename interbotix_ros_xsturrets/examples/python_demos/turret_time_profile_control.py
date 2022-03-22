@@ -8,7 +8,7 @@ from interbotix_xs_modules.turret import InterbotixTurretXS
 
 def main():
     robot = InterbotixTurretXS(
-        robot_model="pxxls",
+        robot_model="wxxms",
         pan_profile_type="time",
         tilt_profile_type="time")
 

@@ -106,4 +106,4 @@ To contribute your own custom X-Series turret in this repo, you will need to do 
 ## Contributors
 - [Solomon Wiznitzer](https://github.com/swiz23) - **ROS Engineer**
 - [Levi Todes](https://github.com/LeTo37) - **CAD Engineer**
-- [Aaron Wood] (aaron.wood@keysight.com) - **Keysight PathWave Test Automation Engineer**
+- Aaron Wood (aaron.wood@keysight.com) - **Keysight OpenTAP Software Engineer**

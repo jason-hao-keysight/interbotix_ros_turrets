@@ -83,7 +83,7 @@ if [ ! -d "$INTERBOTIX_WS/src" ]; then
   mkdir -p $INTERBOTIX_WS/src
   cd $INTERBOTIX_WS/src
   git clone https://github.com/Interbotix/interbotix_ros_core.git
-  git clone https://github.com/Interbotix/interbotix_ros_turrets.git
+  git clone https://github.com/aaron-wood-keysight/interbotix_ros_turrets.git
   git clone https://github.com/Interbotix/interbotix_ros_toolboxes.git
   cd interbotix_ros_turrets && git checkout $ROS_NAME && cd ..
   rm interbotix_ros_core/interbotix_ros_xseries/CATKIN_IGNORE
@@ -133,7 +133,7 @@ source $INTERBOTIX_WS/devel/setup.bash
 launch_from_boot=true
 if [ \"\$launch_from_boot\" == true ] ; then
         echo \"Launching...\"
-	roslaunch interbotix_xsturret_control xsturret_control.launch robot_model:=wxxms & python3 /home/aaron/interbotix_ws/src/interbotix_ros_turrets/interbotix_ros_xsturrets/install/rpi4/RPiServoDriver.py
+	roslaunch interbotix_xsturret_control xsturret_control.launch robot_model:=wxxms & python3 /home/"$USER"/interbotix_ws/src/interbotix_ros_turrets/interbotix_ros_xsturrets/install/rpi4/RPiServoDriver.py
 else
         echo \"Boot launch disabled\"
 fi" > xsturret_rpi4_launch.sh
@@ -158,7 +158,7 @@ WantedBy=graphical.target" > xsturret_rpi4_Keysight_PathWave_Test_Automation_boo
   chmod +x xsturret_rpi4_launch.sh
   sudo cp xsturret_rpi4_Keysight_PathWave_Test_Automation_boot.service /lib/systemd/system/
   sudo systemctl daemon-reload
-  sudo systemctl enable xsturret_rpi4_OpenTAP_boot.service
+  sudo systemctl enable xsturret_rpi4_Keysight_PathWave_Test_Automation_boot.service
   echo -e "hdmi_force_hotplug=1\nhdmi_group=2\nhdmi_mode=82" | sudo tee -a /boot/firmware/usercfg.txt > /dev/null
 fi
 

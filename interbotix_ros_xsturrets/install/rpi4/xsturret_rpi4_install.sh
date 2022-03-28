@@ -2,13 +2,11 @@
 
 ubuntu_version="$(lsb_release -r -s)"
 
-if [ $ubuntu_version == "18.04" ]; then
-  ROS_NAME="melodic"
-elif [ $ubuntu_version == "20.04" ]; then
-  ROS_NAME="noetic"
+if [ $ubuntu_version == "20.04" ]; then
+  ROS_NAME="main"
 else
   echo -e "Unsupported Ubuntu verison: $ubuntu_version"
-  echo -e "Interbotix Turret only works with 18.04 or 20.04 on the Raspberry Pi"
+  echo -e "Interbotix Turret with Keysight PathWave Test Automation only works with 20.04 on the Raspberry Pi"
   exit 1
 fi
 

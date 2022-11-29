@@ -98,6 +98,7 @@ else
   echo "Interbotix X-Series Turret ROS packages already installed!"
 fi
 source $INTERBOTIX_WS/devel/setup.bash
+pip3 install Flask
 
 # Step 4: Setup Environment Variables
 if [ -z "$ROS_IP" ]; then

@@ -24,7 +24,7 @@ Click [here](https://www.keysight.com/us/en/products/software/pathwave-test-soft
 
 
 ## Contributing
-Feel free to use, modify, or update any part of this repo for allowing control of the ROS Turret using any software tool availible
+Feel free to use, modify, or update any part of this repo for allowing control of the ROS Turret using any software tool availible.
 
 ## Contributors
 - [Solomon Wiznitzer](https://github.com/swiz23) - **ROS Engineer**
